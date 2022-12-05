@@ -646,8 +646,8 @@ export default {
       if (!events.length) this.view.events = []
       // @todo: remove the code that explicitly updates this.mutableEvents (e.g on event resize).
       // as we are already mutating the event from mutableEvents.
-      events = events.length ? events : [...this.mutableEvents]
 
+      events = events.length ? events : [...this.mutableEvents]
       // In no event or if on years/year view and eventsCountOnYearView is false
       // then don't add events to view.
       if (!events || (this.isYearsOrYearView && !this.eventsCountOnYearView)) return
@@ -655,7 +655,6 @@ export default {
       // First remove the events that are not in view.
       // Keep the unfiltered array of events for outOfScopeEvents below.
       let filteredEvents = events.filter(e => ue.eventInRange(e, startDate, endDate))
-
       // For each multiple-day event and only if needed, create its segments (= days) for rendering in the view.
       // If we don't display the event on month view (eventsOnMonthView = false) then don't create segments.
       if (!this.isYearsOrYearView && !(this.isMonthView && !this.eventsOnMonthView)) {
@@ -1600,7 +1599,7 @@ export default {
           const weekDays = this.weekDays
 
           cells = weekDays.map((cell, i) => {
-            const startDate = ud.addDays(firstDayOfWeek, this.startWeekOnSunday ? i - 1 : i)
+            const startDate = ud.addDays(firstDayOfWeek, i)
             const endDate = new Date(startDate)
             endDate.setHours(23, 59, 59, 0) // End at 23:59:59.
             const dayOfWeek = (startDate.getDay() || 7) - 1 // Day of the week from 0 to 6 with 6 = Sunday.
